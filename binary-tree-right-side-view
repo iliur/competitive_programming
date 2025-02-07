@@ -1,0 +1,33 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+
+        if (not root):
+            return []
+
+        ret = []
+        dq = deque()
+        dq.append([root, 0]) # second num is depth
+        depth = 0
+        prev = root
+        node = []
+        while(dq):
+            node = dq.popleft()
+            if (node[0]):
+                if (node[1] == depth + 1):
+                    ret.append(prev.val)
+                    depth += 1
+                dq.append([node[0].left, node[1] + 1])
+                dq.append([node[0].right, node[1] + 1])
+                prev = node[0]
+        ret.append(prev.val)
+        return ret
+
+
+
