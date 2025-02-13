@@ -1,0 +1,26 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+
+        arr = []
+        nums = sorted(nums)
+
+        temp = []
+        for i in range(len(nums) - 1):
+            if (nums[i] == nums[i + 1]):
+                temp.append(nums[i])
+            else:
+                temp.append(nums[i])
+                arr.append(temp)
+                temp = []
+        temp.append(nums[-1])
+        arr.append(temp)
+
+        arr = sorted(arr, key=len)
+
+        # print(arr)
+
+        ret = []
+        for j in range (1, k + 1):
+            ret.append(arr[-j][0])
+
+        return ret
