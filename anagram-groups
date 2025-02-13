@@ -1,0 +1,21 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+
+        d = {} # key = arr[0 - 26], val = [word1, word2, etc]
+
+        for i in range(len(strs)):
+            arr = [0] * 26
+            for j in range(len(strs[i])):
+                arr[ord(strs[i][j]) - ord('a')] += 1
+
+            key = tuple(arr)
+            if key not in d:
+                d[key] = []
+            d[key].append(strs[i])
+
+        print (d)
+
+        ret = []
+        for x in d.values():
+            ret.append(x)
+        return ret
