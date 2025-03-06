@@ -1,0 +1,29 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+
+
+        size = []
+
+        def dfs(r, c):
+            size.append(1)
+            grid[r][c] = 0
+            if (r < len(grid) - 1 and grid[r + 1][c] == 1):
+                dfs(r + 1, c)
+            if (r > 0 and grid[r - 1][c] == 1):
+                dfs(r - 1, c)
+            if (c < len(grid[r]) - 1 and grid[r][c + 1] == 1):
+                dfs(r, c + 1)
+            if (c > 0 and grid[r][c - 1] == 1):
+                dfs(r, c - 1)
+
+        index = 0
+        max_so_far = 0
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                if (grid[r][c] == 1):
+                    size = []
+                    dfs(r, c)
+                    if (len(size) > max_so_far):
+                        max_so_far = len(size)
+
+        return max_so_far
