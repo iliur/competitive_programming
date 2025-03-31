@@ -1,0 +1,37 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        
+
+        # base case: char itself is basecase
+
+        # subproblem:
+            # odd: left n right of original are equal
+            # even: left n right are equal
+
+        # linear recurrence:
+            # curr based on if last one is valid
+
+        def palin(curr, l, r):
+            if (l < 0 or r > len(s) - 1):
+                return curr
+            if (s[l] == s[r]):
+                curr = s[l] + curr + s[r]
+                return palin(curr, l - 1, r + 1)
+            else:
+                return curr
+
+        biggest = s[0]
+        for i in range(len(s)):
+            # even
+            string = palin("", i, i + 1)
+            if (len(string) > len(biggest)):
+                biggest = string
+            # odd
+            string = palin(s[i], i - 1, i + 1)
+            if (len(string) > len(biggest)):
+                biggest = string
+
+        return biggest
+
+
+        
